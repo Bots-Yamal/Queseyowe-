@@ -1,0 +1,1059 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080b14">
+<meta name="description" content="Lunar Hollow | Diseño, configuración y personalización de servidores Discord.">
+<title>LUNAR HOLLOW | Nezukodev</title>
+
+<style>
+:root{
+  --bg:#080b14;
+  --panel:#101624;
+  --panel2:#141d2d;
+  --blue:#172e50;
+  --blue2:#294c79;
+  --red:#a52d43;
+  --text:#e7eaf0;
+  --muted:#929cad;
+  --border:rgba(130,160,200,.17);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:
+    radial-gradient(ellipse at 50% -20%,#1b3454 0%,transparent 55%),
+    radial-gradient(ellipse at 100% 80%,#28101c 0%,transparent 35%),
+    var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* FONDO */
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+  opacity:.18;
+  background-image:
+    radial-gradient(1px 1px at 10% 20%,white 100%,transparent),
+    radial-gradient(1px 1px at 80% 30%,white 100%,transparent),
+    radial-gradient(2px 2px at 45% 75%,white 100%,transparent),
+    radial-gradient(1px 1px at 90% 90%,white 100%,transparent),
+    radial-gradient(1px 1px at 25% 60%,white 100%,transparent);
+  background-size:250px 250px;
+}
+
+::selection{
+  background:var(--red);
+  color:white;
+}
+
+/* BARRA SUPERIOR */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  backdrop-filter:blur(18px);
+  background:rgba(8,11,20,.85);
+  border-bottom:1px solid var(--border);
+}
+
+.navbar{
+  max-width:1150px;
+  margin:auto;
+  padding:17px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.logo{
+  font-family:Georgia,serif;
+  font-size:19px;
+  letter-spacing:3px;
+  color:#dce8ff;
+  text-decoration:none;
+  white-space:nowrap;
+}
+
+.logo span{
+  color:#a83c54;
+}
+
+nav{
+  display:flex;
+  gap:7px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+nav button{
+  border:1px solid transparent;
+  background:transparent;
+  color:var(--muted);
+  padding:10px 13px;
+  border-radius:9px;
+  cursor:pointer;
+  font-size:12px;
+  transition:.3s;
+}
+
+nav button:hover,
+nav button.active{
+  background:var(--panel2);
+  color:white;
+  border-color:var(--border);
+}
+
+nav button.active{
+  box-shadow:inset 0 -2px var(--red);
+}
+
+/* CONTENIDO */
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:65px 24px 50px;
+  min-height:75vh;
+}
+
+.page{
+  display:none;
+  animation:appear .55s ease;
+}
+
+.page.active{
+  display:block;
+}
+
+@keyframes appear{
+  from{
+    opacity:0;
+    transform:translateY(17px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* INICIO */
+
+.hero{
+  min-height:480px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:35px 10px;
+}
+
+.moon{
+  width:105px;
+  height:105px;
+  border-radius:50%;
+  background:linear-gradient(140deg,#f0f2f7,#8297b6);
+  box-shadow:0 0 35px rgba(139,174,222,.3),
+             0 0 100px rgba(45,90,145,.2);
+  position:relative;
+  margin-bottom:35px;
+  animation:float 5s ease-in-out infinite;
+}
+
+.moon::after{
+  content:"";
+  position:absolute;
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  background:var(--bg);
+  left:30px;
+  top:-15px;
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
+}
+
+.eyebrow{
+  color:#a4b8d7;
+  letter-spacing:5px;
+  font-size:11px;
+  text-transform:uppercase;
+  margin-bottom:17px;
+}
+
+.hero h1{
+  font-family:Georgia,serif;
+  font-size:clamp(38px,8vw,75px);
+  letter-spacing:7px;
+  font-weight:normal;
+  color:#edf2fa;
+  text-shadow:0 0 30px rgba(108,148,204,.25);
+}
+
+.hero h3{
+  color:#b9c8df;
+  font-size:17px;
+  font-weight:normal;
+  margin-top:18px;
+}
+
+.quote{
+  color:#a2aabd;
+  font-family:Georgia,serif;
+  font-style:italic;
+  margin-top:23px;
+  font-size:14px;
+}
+
+.hero-description{
+  max-width:700px;
+  line-height:1.9;
+  color:var(--muted);
+  margin:30px auto;
+  font-size:14px;
+}
+
+.buttons{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:12px;
+}
+
+.btn{
+  border:1px solid var(--border);
+  padding:13px 23px;
+  border-radius:8px;
+  text-decoration:none;
+  color:white;
+  background:var(--panel2);
+  cursor:pointer;
+  font-size:12px;
+  transition:.3s;
+}
+
+.btn:hover{
+  transform:translateY(-4px);
+  border-color:var(--red);
+  box-shadow:0 8px 25px rgba(0,0,0,.3);
+}
+
+.btn.primary{
+  background:linear-gradient(120deg,#263e60,#772c41);
+  border:0;
+}
+
+/* BLOQUES */
+
+.section-title{
+  text-align:center;
+  margin-bottom:38px;
+}
+
+.section-title small{
+  color:#a3b8da;
+  letter-spacing:4px;
+  font-size:10px;
+}
+
+.section-title h2{
+  font-family:Georgia,serif;
+  font-size:35px;
+  font-weight:normal;
+  margin-top:12px;
+}
+
+.section-title p{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:12px;
+}
+
+.content-card{
+  background:linear-gradient(145deg,rgba(22,35,55,.88),rgba(13,17,28,.9));
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:30px;
+  margin-bottom:22px;
+  line-height:1.9;
+  color:#b9c2d1;
+  font-size:14px;
+  transition:.3s;
+}
+
+.content-card:hover{
+  border-color:rgba(143,170,209,.35);
+  transform:translateY(-3px);
+}
+
+.content-card strong{
+  color:#e5eaf4;
+}
+
+.content-card blockquote{
+  border-left:2px solid var(--red);
+  padding-left:18px;
+  margin:13px 0;
+}
+
+.content-card h3{
+  color:#d8e5f8;
+  font-family:Georgia,serif;
+  font-size:20px;
+  font-weight:normal;
+  margin-bottom:12px;
+}
+
+.signature{
+  text-align:center;
+  font-family:Georgia,serif;
+  font-style:italic;
+  color:#b3c5e1;
+  margin:30px 0;
+  font-size:14px;
+}
+
+/* TARJETAS DE SERVICIOS */
+
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+}
+
+.service{
+  padding:24px;
+  background:linear-gradient(145deg,#121d2e,#0d111c);
+  border:1px solid var(--border);
+  border-radius:12px;
+  transition:.35s;
+  position:relative;
+  overflow:hidden;
+}
+
+.service::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:3px;
+  height:0;
+  background:var(--red);
+  transition:.35s;
+}
+
+.service:hover{
+  transform:translateY(-5px);
+  border-color:rgba(130,160,200,.4);
+}
+
+.service:hover::before{
+  height:100%;
+}
+
+.service h3{
+  color:#d7e4f8;
+  font-family:Georgia,serif;
+  font-size:18px;
+  font-weight:normal;
+  margin-bottom:13px;
+}
+
+.service p{
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.8;
+}
+
+.service-icon{
+  font-size:23px;
+  display:block;
+  margin-bottom:15px;
+}
+
+.services-footer{
+  margin-top:28px;
+  text-align:center;
+  border:1px solid var(--border);
+  padding:24px;
+  border-radius:12px;
+  background:rgba(120,35,55,.09);
+  color:#d3dceb;
+  font-family:Georgia,serif;
+  font-style:italic;
+}
+
+/* EXPERIENCIA */
+
+.experience-box{
+  border:1px solid var(--border);
+  background:linear-gradient(140deg,#121e30,#0d111c);
+  border-radius:15px;
+  padding:35px;
+  line-height:2;
+  color:#b8c2d1;
+  font-size:14px;
+}
+
+.experience-box p{
+  margin-bottom:20px;
+}
+
+.experience-box strong{
+  color:#e6eaf3;
+}
+
+/* RESEÑAS */
+
+.coming-soon{
+  min-height:380px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:35px;
+  background:linear-gradient(145deg,#131e30,#0d111c);
+  border:1px solid var(--border);
+  border-radius:16px;
+}
+
+.coming-icon{
+  font-size:48px;
+  margin-bottom:25px;
+  filter:drop-shadow(0 0 15px #55739d);
+  animation:float 4s ease-in-out infinite;
+}
+
+.coming-soon h2{
+  font-family:Georgia,serif;
+  font-size:35px;
+  font-weight:normal;
+  letter-spacing:2px;
+}
+
+.coming-soon p{
+  color:var(--muted);
+  max-width:400px;
+  line-height:1.8;
+  font-size:13px;
+  margin-top:17px;
+}
+
+/* CONTACTO */
+
+.contact-box{
+  max-width:650px;
+  margin:auto;
+  text-align:center;
+  padding:40px 25px;
+  background:linear-gradient(145deg,#142139,#101522);
+  border:1px solid var(--border);
+  border-radius:16px;
+}
+
+.contact-box p{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.9;
+  margin:20px auto;
+}
+
+.discord{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:15px 25px;
+  background:linear-gradient(120deg,#243f66,#713044);
+  border:1px solid rgba(180,190,220,.2);
+  color:white;
+  border-radius:9px;
+  font-size:14px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.discord:hover{
+  transform:translateY(-4px);
+  box-shadow:0 8px 25px rgba(0,0,0,.3);
+}
+
+/* PIE */
+
+footer{
+  border-top:1px solid var(--border);
+  padding:25px 15px;
+  text-align:center;
+  color:#657187;
+  font-size:11px;
+  line-height:2;
+}
+
+footer strong{
+  color:#b8c7dd;
+  letter-spacing:2px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:700px){
+
+  .navbar{
+    flex-direction:column;
+    padding:15px 10px;
+    gap:13px;
+  }
+
+  nav{
+    justify-content:center;
+    gap:3px;
+  }
+
+  nav button{
+    padding:9px 10px;
+    font-size:11px;
+  }
+
+  main{
+    padding:35px 15px;
+  }
+
+  .hero{
+    min-height:440px;
+  }
+
+  .hero h1{
+    letter-spacing:3px;
+  }
+
+  .hero h3{
+    font-size:14px;
+  }
+
+  .services-grid{
+    grid-template-columns:1fr;
+  }
+
+  .content-card{
+    padding:22px;
+  }
+
+  .experience-box{
+    padding:24px;
+  }
+
+  .section-title h2{
+    font-size:29px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="navbar">
+
+    <a href="#" class="logo" onclick="showPage('inicio');return false;">
+      ☾ LUNAR <span>HOLLOW</span>
+    </a>
+
+    <nav>
+      <button class="active" data-page="inicio" onclick="showPage('inicio')">Inicio</button>
+      <button data-page="sobre" onclick="showPage('sobre')">Sobre mí</button>
+      <button data-page="servicios" onclick="showPage('servicios')">Servicios</button>
+      <button data-page="experiencia" onclick="showPage('experiencia')">Experiencia</button>
+      <button data-page="resenas" onclick="showPage('resenas')">Reseñas</button>
+      <button data-page="contacto" onclick="showPage('contacto')">Contactar</button>
+    </nav>
+
+  </div>
+</header>
+
+<main>
+
+<!-- INICIO -->
+
+<section class="page active" id="inicio">
+
+  <div class="hero">
+
+    <div class="moon"></div>
+
+    <div class="eyebrow">✦ NEZUKODEV PRESENTS ✦</div>
+
+    <h1>LUNAR HOLLOW</h1>
+
+    <h3>Entre sombras, nace una nueva comunidad.</h3>
+
+    <div class="quote">
+      “Donde las sombras convergen y la manada toma forma.”
+    </div>
+
+    <p class="hero-description">
+      Bienvenido a <strong>Lunar Hollow</strong>, un espacio dedicado al diseño,
+      configuración y personalización de servidores de Discord.
+      <br><br>
+      Detrás de cada comunidad existe una identidad esperando ser descubierta.
+      Mi propósito es transformar ideas en espacios únicos, combinando
+      organización, estética, funcionalidad y seguridad para crear servidores
+      que no solo tengan una buena apariencia, sino también personalidad propia.
+      <br><br>
+      Con años de experiencia en Discord y numerosos proyectos a mis espaldas,
+      busco ofrecer un servicio cuidado, adaptado a las necesidades y temática
+      de cada comunidad.
+    </p>
+
+    <div class="buttons">
+      <button class="btn primary" onclick="showPage('servicios')">
+        ✦ Explorar servicios
+      </button>
+      <button class="btn" onclick="showPage('contacto')">
+        ☾ Contactar
+      </button>
+    </div>
+
+  </div>
+
+  <div class="section-title">
+    <small>✦ DESCUBRE EL REFUGIO ✦</small>
+    <h2>¿Qué encontrarás aquí?</h2>
+  </div>
+
+  <div class="services-grid">
+
+    <div class="service">
+      <span class="service-icon">🌑</span>
+      <h3>Sobre mí</h3>
+      <p>Conoce quién está detrás de Lunar Hollow, mi trayectoria y la experiencia que respalda cada proyecto.</p>
+      <br>
+      <button class="btn" onclick="showPage('sobre')">Descubrir →</button>
+    </div>
+
+    <div class="service">
+      <span class="service-icon">🔮</span>
+      <h3>Servicios</h3>
+      <p>Descubre las posibilidades de configuración, diseño y personalización disponibles para tu servidor.</p>
+      <br>
+      <button class="btn" onclick="showPage('servicios')">Descubrir →</button>
+    </div>
+
+    <div class="service">
+      <span class="service-icon">🕯️</span>
+      <h3>Experiencia</h3>
+      <p>Un recorrido por los años de trabajo, las comunidades y los proyectos que han contribuido a desarrollar mis conocimientos.</p>
+      <br>
+      <button class="btn" onclick="showPage('experiencia')">Descubrir →</button>
+    </div>
+
+    <div class="service">
+      <span class="service-icon">📩</span>
+      <h3>Contacto</h3>
+      <p>Encuentra la información necesaria para solicitar un servicio, consultar dudas o comenzar tu próximo proyecto.</p>
+      <br>
+      <button class="btn" onclick="showPage('contacto')">Descubrir →</button>
+    </div>
+
+  </div>
+
+  <div class="content-card" style="margin-top:35px;text-align:center">
+    <h3>🐾 Una última invitación...</h3>
+    <p>
+      Cada comunidad tiene su propia esencia, sus propias reglas y una historia
+      que contar. No importa si estás comenzando desde cero o deseas renovar
+      un espacio existente: todo gran refugio comienza con una idea.
+    </p>
+    <br>
+    <strong>Lunar Hollow te invita a darle forma.</strong>
+    <div class="signature">
+      ✦ Tras el velo de la luna, todo refugio encuentra su forma.
+    </div>
+  </div>
+
+</section>
+
+<!-- SOBRE MI -->
+
+<section class="page" id="sobre">
+
+  <div class="section-title">
+    <small>✦ CONOCE AL CREADOR ✦</small>
+    <h2>☾ Sobre mí...</h2>
+    <p>Detrás de Lunar Hollow existe una historia.</p>
+  </div>
+
+  <div class="content-card">
+
+    <blockquote>
+      Tras años recorriendo comunidades y dando forma a distintos rincones
+      de Discord, he aprendido que un servidor no es simplemente un conjunto
+      de canales y roles, sino un lugar que puede convertirse en un refugio,
+      una identidad y una historia propia.
+    </blockquote>
+
+    <p>
+      Soy un chico de 23 años, dedicado a la creación, organización y
+      personalización de servidores, especialmente dentro de la comunidad furry.
+      Me gusta cuidar cada detalle, desde la estructura hasta la estética,
+      construyendo espacios que no solo sean funcionales, sino que transmitan
+      personalidad, misterio y carácter.
+    </p>
+
+    <br>
+
+    <p>
+      No se trata únicamente de construir un servidor, sino de darle vida,
+      encontrar su esencia y convertirlo en un lugar al que otros quieran pertenecer.
+    </p>
+
+    <div class="signature">
+      ✦ Cada proyecto tiene su propia sombra. Mi trabajo es darle forma.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- SERVICIOS -->
+
+<section class="page" id="servicios">
+
+  <div class="section-title">
+    <small>✦ CATÁLOGO DE SERVICIOS ✦</small>
+    <h2>☾ El sendero del refugio</h2>
+    <p>Soluciones personalizadas para tu comunidad.</p>
+  </div>
+
+  <div class="services-grid">
+
+    <div class="service">
+      <span class="service-icon">🌑</span>
+      <h3>El sendero del refugio</h3>
+      <p>
+        Organización de categorías, canales y espacios, creando una estructura
+        intuitiva donde cada rincón tenga un propósito y cada miembro encuentre su lugar.
+      </p>
+    </div>
+
+    <div class="service">
+      <span class="service-icon">🐾</span>
+      <h3>Marcas de la manada</h3>
+      <p>
+        Diseño, distribución y jerarquía de roles, dando forma a una identidad
+        visual propia y a una estructura que refleje la esencia de tu comunidad.
+      </p>
+    </div>
+
+    <div class="service">
+      <span class="service-icon">🛡️</span>
+      <h3>Guardianes del umbral</h3>
+      <p>
+        Configuración de bots, sistemas automatizados y herramientas de protección,
+        pensadas para facilitar la gestión y mantener el orden dentro del refugio.
+      </p>
+    </div>
+
+    <div class="service">
+      <span class="service-icon">🌘</span>
+      <h3>Protección entre sombras</h3>
+      <p>
+        Configuración de permisos, seguridad y herramientas de moderación,
+        estableciendo barreras, controles y medidas que ayuden a proteger la comunidad.
+      </p>
+    </div>
+
+    <div class="service">
+      <span class="service-icon">🔮</span>
+      <h3>La esencia de las sombras</h3>
+      <p>
+        Decoración, ambientación y personalización estética, cuidando cada detalle
+        para que el servidor transmita su propia atmósfera e identidad.
+      </p>
+    </div>
+
+    <div class="service">
+      <span class="service-icon">📜</span>
+      <h3>Las leyes del refugio</h3>
+      <p>
+        Creación y organización de reglamentos, guías, canales informativos y
+        sistemas de orientación para quienes cruzan por primera vez sus puertas.
+      </p>
+    </div>
+
+    <div class="service">
+      <span class="service-icon">🐺</span>
+      <h3>Vínculos de la manada</h3>
+      <p>
+        Diseño de sistemas sociales, rangos, recompensas y dinámicas interactivas
+        que fomenten la participación, la convivencia y el crecimiento de la comunidad.
+      </p>
+    </div>
+
+    <div class="service">
+      <span class="service-icon">🌙</span>
+      <h3>El pacto de la luna</h3>
+      <p>
+        Configuración completamente adaptada a la temática, preferencias y
+        necesidades de cada proyecto. Cada servidor tiene su propia historia;
+        el diseño debe respetarla.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="services-footer">
+    No construimos simples servidores.
+    <br>
+    Damos forma a nuevos refugios.
+  </div>
+
+</section>
+
+<!-- EXPERIENCIA -->
+
+<section class="page" id="experiencia">
+
+  <div class="section-title">
+    <small>✦ MI TRAYECTORIA ✦</small>
+    <h2>🐺 Experiencia</h2>
+    <p>Cada proyecto deja una huella.</p>
+  </div>
+
+  <div class="experience-box">
+
+    <p>
+      Mi experiencia no nace de un único proyecto, sino de años recorriendo
+      Discord, aprendiendo, experimentando y trabajando junto a numerosas
+      comunidades que, en algún momento, confiaron en mí para dar forma a sus espacios.
+    </p>
+
+    <p>
+      A lo largo de ese camino, he tenido la oportunidad de participar en
+      proyectos de distintas temáticas, conocer diferentes formas de gestionar
+      comunidades y afrontar retos que me han permitido perfeccionar mis
+      habilidades, ampliar mis conocimientos y desarrollar mi propio criterio
+      a la hora de diseñar y organizar servidores.
+    </p>
+
+    <p>
+      Cada comunidad que ha pasado por mis manos ha dejado algo detrás:
+      una nueva idea, una lección o una experiencia que contribuye a lo que
+      hoy puedo ofrecer.
+    </p>
+
+    <p>
+      <strong>
+        No son solo años en Discord, sino huellas de cada proyecto que han
+        dado forma a mi experiencia.
+      </strong>
+    </p>
+
+  </div>
+
+  <div class="signature">
+    ☾ Cada paso deja una marca en el camino.
+  </div>
+
+</section>
+
+<!-- RESEÑAS -->
+
+<section class="page" id="resenas">
+
+  <div class="section-title">
+    <small>✦ VOCES DEL REFUGIO ✦</small>
+    <h2>Reseñas</h2>
+    <p>Las experiencias de quienes forman parte de esta historia.</p>
+  </div>
+
+  <div class="coming-soon">
+
+    <div class="coming-icon">🌙</div>
+
+    <h2>Próximamente...</h2>
+
+    <p>
+      Las opiniones de quienes han confiado en Lunar Hollow estarán aquí muy pronto.
+    </p>
+
+    <div class="signature">
+      ✦ Cada historia merece ser escuchada.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- CONTACTO -->
+
+<section class="page" id="contacto">
+
+  <div class="section-title">
+    <small>✦ LAS PUERTAS ESTÁN ABIERTAS ✦</small>
+    <h2>📩 Contacto</h2>
+    <p>Comencemos a construir tu próximo refugio.</p>
+  </div>
+
+  <div class="contact-box">
+
+    <div class="coming-icon">🐾</div>
+
+    <h2 style="font-family:Georgia,serif;font-weight:normal">
+      Contacta con Lunar Hollow
+    </h2>
+
+    <p>
+      Las puertas de Lunar Hollow permanecen abiertas para quienes buscan
+      dar forma a su comunidad.
+      <br><br>
+      Actualmente, la atención, consultas y solicitudes de servicios se
+      realizan exclusivamente a través de <strong>Discord</strong>, donde
+      podremos hablar sobre tu proyecto, ideas, necesidades y los detalles
+      necesarios para comenzar a construir tu próximo refugio.
+    </p>
+
+    <p>🐾・Discord:</p>
+
+    <button class="discord" onclick="copyDiscord()">
+      <span>◈</span>
+      <span id="discordText">nezukochan_0903</span>
+      <span>⧉</span>
+    </button>
+
+    <p style="font-size:11px;margin-top:14px">
+      Pulsa el botón para copiar el usuario.
+    </p>
+
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  <strong>☾ LUNAR HOLLOW</strong>
+  <br>
+  Diseñado con dedicación por NezukoChan.
+  <br>
+  © 2026 Lunar Hollow · Todos los derechos reservados.
+  <br>
+  <span style="color:#526987">✦ Tras el velo de la luna, todo refugio encuentra su forma.</span>
+</footer>
+
+<script>
+
+/* NAVEGACIÓN */
+
+function showPage(page){
+
+  const pages=document.querySelectorAll(".page");
+  const buttons=document.querySelectorAll("nav button");
+
+  pages.forEach(section=>{
+    section.classList.remove("active");
+  });
+
+  buttons.forEach(button=>{
+    button.classList.remove("active");
+  });
+
+  const selected=document.getElementById(page);
+
+  if(selected){
+    selected.classList.add("active");
+  }
+
+  const activeButton=document.querySelector(
+    'nav button[data-page="'+page+'"]'
+  );
+
+  if(activeButton){
+    activeButton.classList.add("active");
+  }
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+/* COPIAR DISCORD */
+
+function copyDiscord(){
+
+  const username="nezukochan_0903";
+  const text=document.getElementById("discordText");
+
+  if(navigator.clipboard && window.isSecureContext){
+
+    navigator.clipboard.writeText(username).then(()=>{
+      text.textContent="¡Copiado!";
+      setTimeout(()=>{
+        text.textContent=username;
+      },1800);
+    }).catch(()=>{
+      text.textContent=username;
+    });
+
+  }else{
+
+    const input=document.createElement("textarea");
+    input.value=username;
+    document.body.appendChild(input);
+    input.select();
+
+    try{
+      document.execCommand("copy");
+      text.textContent="¡Copiado!";
+      setTimeout(()=>{
+        text.textContent=username;
+      },1800);
+    }catch(e){
+      text.textContent=username;
+    }
+
+    input.remove();
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
