@@ -5,16 +5,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#080b14">
-<meta name="description" content="Lunar Hollow | Diseño, configuración y personalización de servidores Discord.">
+<meta name="description" content="Lunar Hollow | Diseño y configuración de servidores Discord.">
 <title>LUNAR HOLLOW | Nezukodev</title>
 
 <style>
 :root{
   --bg:#080b14;
-  --panel:#101624;
-  --panel2:#141d2d;
-  --blue:#172e50;
-  --blue2:#294c79;
+  --panel:#101827;
+  --panel2:#142239;
+  --blue:#294c79;
   --red:#a52d43;
   --text:#e7eaf0;
   --muted:#929cad;
@@ -27,9 +26,7 @@
   box-sizing:border-box;
 }
 
-html{
-  scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
   background:
@@ -42,36 +39,57 @@ body{
   overflow-x:hidden;
 }
 
-/* FONDO */
+::selection{background:var(--red);color:white}
 
-body::before{
-  content:"";
+/* FONDO ANIMADO */
+
+#particles{
   position:fixed;
   inset:0;
   pointer-events:none;
   z-index:-1;
-  opacity:.18;
-  background-image:
-    radial-gradient(1px 1px at 10% 20%,white 100%,transparent),
-    radial-gradient(1px 1px at 80% 30%,white 100%,transparent),
-    radial-gradient(2px 2px at 45% 75%,white 100%,transparent),
-    radial-gradient(1px 1px at 90% 90%,white 100%,transparent),
-    radial-gradient(1px 1px at 25% 60%,white 100%,transparent);
-  background-size:250px 250px;
+  overflow:hidden;
 }
 
-::selection{
-  background:var(--red);
-  color:white;
+.star{
+  position:absolute;
+  width:3px;
+  height:3px;
+  background:#c9d9f3;
+  border-radius:50%;
+  opacity:.4;
+  animation:twinkle 4s infinite ease-in-out;
 }
 
-/* BARRA SUPERIOR */
+@keyframes twinkle{
+  0%,100%{opacity:.12;transform:scale(.7)}
+  50%{opacity:.8;transform:scale(1.5)}
+}
+
+.glow{
+  position:fixed;
+  width:300px;
+  height:300px;
+  border-radius:50%;
+  background:rgba(38,83,142,.08);
+  filter:blur(90px);
+  pointer-events:none;
+  z-index:-1;
+  animation:glowMove 12s ease-in-out infinite alternate;
+}
+
+@keyframes glowMove{
+  from{transform:translate(-30px,-30px)}
+  to{transform:translate(100px,100px)}
+}
+
+/* HEADER */
 
 header{
   position:sticky;
   top:0;
   z-index:100;
-  backdrop-filter:blur(18px);
+  backdrop-filter:blur(20px);
   background:rgba(8,11,20,.85);
   border-bottom:1px solid var(--border);
 }
@@ -93,11 +111,15 @@ header{
   color:#dce8ff;
   text-decoration:none;
   white-space:nowrap;
+  transition:.4s;
 }
 
-.logo span{
-  color:#a83c54;
+.logo:hover{
+  text-shadow:0 0 20px #739acb;
+  letter-spacing:5px;
 }
+
+.logo span{color:#a83c54}
 
 nav{
   display:flex;
@@ -137,24 +159,29 @@ main{
   min-height:75vh;
 }
 
-.page{
-  display:none;
-  animation:appear .55s ease;
-}
+.page{display:none}
 
 .page.active{
   display:block;
+  animation:pageEnter .65s cubic-bezier(.2,.8,.2,1);
 }
 
-@keyframes appear{
-  from{
-    opacity:0;
-    transform:translateY(17px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+@keyframes pageEnter{
+  from{opacity:0;transform:translateY(25px);filter:blur(5px)}
+  to{opacity:1;transform:translateY(0);filter:blur(0)}
+}
+
+/* ANIMACIÓN DE ELEMENTOS */
+
+.reveal{
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity .8s ease,transform .8s ease;
+}
+
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
 }
 
 /* INICIO */
@@ -174,11 +201,12 @@ main{
   height:105px;
   border-radius:50%;
   background:linear-gradient(140deg,#f0f2f7,#8297b6);
-  box-shadow:0 0 35px rgba(139,174,222,.3),
-             0 0 100px rgba(45,90,145,.2);
+  box-shadow:
+    0 0 35px rgba(139,174,222,.3),
+    0 0 100px rgba(45,90,145,.2);
   position:relative;
   margin-bottom:35px;
-  animation:float 5s ease-in-out infinite;
+  animation:moonFloat 5s ease-in-out infinite,moonGlow 4s infinite alternate;
 }
 
 .moon::after{
@@ -192,9 +220,14 @@ main{
   top:-15px;
 }
 
-@keyframes float{
+@keyframes moonFloat{
   0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-12px)}
+  50%{transform:translateY(-13px)}
+}
+
+@keyframes moonGlow{
+  from{filter:drop-shadow(0 0 5px #7894bc)}
+  to{filter:drop-shadow(0 0 25px #7894bc)}
 }
 
 .eyebrow{
@@ -212,6 +245,12 @@ main{
   font-weight:normal;
   color:#edf2fa;
   text-shadow:0 0 30px rgba(108,148,204,.25);
+  animation:titleGlow 5s infinite alternate;
+}
+
+@keyframes titleGlow{
+  from{text-shadow:0 0 10px rgba(108,148,204,.15)}
+  to{text-shadow:0 0 35px rgba(108,148,204,.6)}
 }
 
 .hero h3{
@@ -245,6 +284,8 @@ main{
   margin-top:12px;
 }
 
+/* BOTONES */
+
 .btn{
   border:1px solid var(--border);
   padding:13px 23px;
@@ -254,21 +295,38 @@ main{
   background:var(--panel2);
   cursor:pointer;
   font-size:12px;
-  transition:.3s;
+  transition:.35s;
+  position:relative;
+  overflow:hidden;
 }
 
+.btn::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-120%;
+  width:100%;
+  height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);
+  transition:.6s;
+}
+
+.btn:hover::before{left:120%}
+
 .btn:hover{
-  transform:translateY(-4px);
+  transform:translateY(-5px);
   border-color:var(--red);
   box-shadow:0 8px 25px rgba(0,0,0,.3);
 }
+
+.btn:active{transform:scale(.96)}
 
 .btn.primary{
   background:linear-gradient(120deg,#263e60,#772c41);
   border:0;
 }
 
-/* BLOQUES */
+/* TITULOS */
 
 .section-title{
   text-align:center;
@@ -294,6 +352,8 @@ main{
   margin-top:12px;
 }
 
+/* TARJETAS */
+
 .content-card{
   background:linear-gradient(145deg,rgba(22,35,55,.88),rgba(13,17,28,.9));
   border:1px solid var(--border);
@@ -303,17 +363,16 @@ main{
   line-height:1.9;
   color:#b9c2d1;
   font-size:14px;
-  transition:.3s;
+  transition:.4s;
 }
 
 .content-card:hover{
-  border-color:rgba(143,170,209,.35);
-  transform:translateY(-3px);
+  border-color:rgba(143,170,209,.4);
+  box-shadow:0 15px 35px rgba(0,0,0,.2);
+  transform:translateY(-4px);
 }
 
-.content-card strong{
-  color:#e5eaf4;
-}
+.content-card strong{color:#e5eaf4}
 
 .content-card blockquote{
   border-left:2px solid var(--red);
@@ -338,7 +397,7 @@ main{
   font-size:14px;
 }
 
-/* TARJETAS DE SERVICIOS */
+/* SERVICIOS */
 
 .services-grid{
   display:grid;
@@ -351,7 +410,7 @@ main{
   background:linear-gradient(145deg,#121d2e,#0d111c);
   border:1px solid var(--border);
   border-radius:12px;
-  transition:.35s;
+  transition:.4s cubic-bezier(.2,.8,.2,1);
   position:relative;
   overflow:hidden;
 }
@@ -364,16 +423,26 @@ main{
   width:3px;
   height:0;
   background:var(--red);
-  transition:.35s;
+  transition:.4s;
 }
 
 .service:hover{
-  transform:translateY(-5px);
+  transform:translateY(-8px) scale(1.015);
   border-color:rgba(130,160,200,.4);
+  box-shadow:0 15px 30px rgba(0,0,0,.25);
 }
 
-.service:hover::before{
-  height:100%;
+.service:hover::before{height:100%}
+
+.service-icon{
+  font-size:23px;
+  display:block;
+  margin-bottom:15px;
+  transition:.4s;
+}
+
+.service:hover .service-icon{
+  transform:scale(1.2) rotate(-8deg);
 }
 
 .service h3{
@@ -390,12 +459,6 @@ main{
   line-height:1.8;
 }
 
-.service-icon{
-  font-size:23px;
-  display:block;
-  margin-bottom:15px;
-}
-
 .services-footer{
   margin-top:28px;
   text-align:center;
@@ -406,6 +469,11 @@ main{
   color:#d3dceb;
   font-family:Georgia,serif;
   font-style:italic;
+  transition:.4s;
+}
+
+.services-footer:hover{
+  background:rgba(120,35,55,.17);
 }
 
 /* EXPERIENCIA */
@@ -418,15 +486,16 @@ main{
   line-height:2;
   color:#b8c2d1;
   font-size:14px;
+  transition:.4s;
 }
 
-.experience-box p{
-  margin-bottom:20px;
+.experience-box:hover{
+  border-color:rgba(130,160,200,.4);
+  transform:translateY(-4px);
 }
 
-.experience-box strong{
-  color:#e6eaf3;
-}
+.experience-box p{margin-bottom:20px}
+.experience-box strong{color:#e6eaf3}
 
 /* RESEÑAS */
 
@@ -441,13 +510,19 @@ main{
   background:linear-gradient(145deg,#131e30,#0d111c);
   border:1px solid var(--border);
   border-radius:16px;
+  transition:.4s;
+}
+
+.coming-soon:hover{
+  border-color:rgba(130,160,200,.4);
+  box-shadow:0 15px 35px rgba(0,0,0,.2);
 }
 
 .coming-icon{
   font-size:48px;
   margin-bottom:25px;
   filter:drop-shadow(0 0 15px #55739d);
-  animation:float 4s ease-in-out infinite;
+  animation:moonFloat 4s ease-in-out infinite;
 }
 
 .coming-soon h2{
@@ -475,6 +550,12 @@ main{
   background:linear-gradient(145deg,#142139,#101522);
   border:1px solid var(--border);
   border-radius:16px;
+  transition:.4s;
+}
+
+.contact-box:hover{
+  border-color:rgba(130,160,200,.4);
+  transform:translateY(-4px);
 }
 
 .contact-box p{
@@ -496,15 +577,15 @@ main{
   border-radius:9px;
   font-size:14px;
   cursor:pointer;
-  transition:.3s;
+  transition:.35s;
 }
 
 .discord:hover{
-  transform:translateY(-4px);
+  transform:translateY(-5px) scale(1.04);
   box-shadow:0 8px 25px rgba(0,0,0,.3);
 }
 
-/* PIE */
+/* FOOTER */
 
 footer{
   border-top:1px solid var(--border);
@@ -540,37 +621,18 @@ footer strong{
     font-size:11px;
   }
 
-  main{
-    padding:35px 15px;
-  }
+  main{padding:35px 15px}
 
-  .hero{
-    min-height:440px;
-  }
+  .hero{min-height:440px}
 
-  .hero h1{
-    letter-spacing:3px;
-  }
+  .hero h1{letter-spacing:3px}
+  .hero h3{font-size:14px}
 
-  .hero h3{
-    font-size:14px;
-  }
+  .services-grid{grid-template-columns:1fr}
 
-  .services-grid{
-    grid-template-columns:1fr;
-  }
-
-  .content-card{
-    padding:22px;
-  }
-
-  .experience-box{
-    padding:24px;
-  }
-
-  .section-title h2{
-    font-size:29px;
-  }
+  .content-card{padding:22px}
+  .experience-box{padding:24px}
+  .section-title h2{font-size:29px}
 }
 
 @media(prefers-reduced-motion:reduce){
@@ -584,6 +646,9 @@ footer strong{
 </head>
 
 <body>
+
+<div id="particles"></div>
+<div class="glow"></div>
 
 <header>
   <div class="navbar">
@@ -627,36 +692,36 @@ footer strong{
     <p class="hero-description">
       Bienvenido a <strong>Lunar Hollow</strong>, un espacio dedicado al diseño,
       configuración y personalización de servidores de Discord.
+
       <br><br>
+
       Detrás de cada comunidad existe una identidad esperando ser descubierta.
       Mi propósito es transformar ideas en espacios únicos, combinando
       organización, estética, funcionalidad y seguridad para crear servidores
       que no solo tengan una buena apariencia, sino también personalidad propia.
+
       <br><br>
+
       Con años de experiencia en Discord y numerosos proyectos a mis espaldas,
       busco ofrecer un servicio cuidado, adaptado a las necesidades y temática
       de cada comunidad.
     </p>
 
     <div class="buttons">
-      <button class="btn primary" onclick="showPage('servicios')">
-        ✦ Explorar servicios
-      </button>
-      <button class="btn" onclick="showPage('contacto')">
-        ☾ Contactar
-      </button>
+      <button class="btn primary" onclick="showPage('servicios')">✦ Explorar servicios</button>
+      <button class="btn" onclick="showPage('contacto')">☾ Contactar</button>
     </div>
 
   </div>
 
-  <div class="section-title">
+  <div class="section-title reveal">
     <small>✦ DESCUBRE EL REFUGIO ✦</small>
     <h2>¿Qué encontrarás aquí?</h2>
   </div>
 
   <div class="services-grid">
 
-    <div class="service">
+    <div class="service reveal">
       <span class="service-icon">🌑</span>
       <h3>Sobre mí</h3>
       <p>Conoce quién está detrás de Lunar Hollow, mi trayectoria y la experiencia que respalda cada proyecto.</p>
@@ -664,7 +729,7 @@ footer strong{
       <button class="btn" onclick="showPage('sobre')">Descubrir →</button>
     </div>
 
-    <div class="service">
+    <div class="service reveal">
       <span class="service-icon">🔮</span>
       <h3>Servicios</h3>
       <p>Descubre las posibilidades de configuración, diseño y personalización disponibles para tu servidor.</p>
@@ -672,7 +737,7 @@ footer strong{
       <button class="btn" onclick="showPage('servicios')">Descubrir →</button>
     </div>
 
-    <div class="service">
+    <div class="service reveal">
       <span class="service-icon">🕯️</span>
       <h3>Experiencia</h3>
       <p>Un recorrido por los años de trabajo, las comunidades y los proyectos que han contribuido a desarrollar mis conocimientos.</p>
@@ -680,7 +745,7 @@ footer strong{
       <button class="btn" onclick="showPage('experiencia')">Descubrir →</button>
     </div>
 
-    <div class="service">
+    <div class="service reveal">
       <span class="service-icon">📩</span>
       <h3>Contacto</h3>
       <p>Encuentra la información necesaria para solicitar un servicio, consultar dudas o comenzar tu próximo proyecto.</p>
@@ -690,7 +755,7 @@ footer strong{
 
   </div>
 
-  <div class="content-card" style="margin-top:35px;text-align:center">
+  <div class="content-card reveal" style="margin-top:35px;text-align:center">
     <h3>🐾 Una última invitación...</h3>
     <p>
       Cada comunidad tiene su propia esencia, sus propias reglas y una historia
@@ -716,28 +781,26 @@ footer strong{
     <p>Detrás de Lunar Hollow existe una historia.</p>
   </div>
 
-  <div class="content-card">
+  <div class="content-card reveal">
 
     <blockquote>
-      Tras años recorriendo comunidades y dando forma a distintos rincones
-      de Discord, he aprendido que un servidor no es simplemente un conjunto
-      de canales y roles, sino un lugar que puede convertirse en un refugio,
-      una identidad y una historia propia.
+      Tras años recorriendo comunidades y dando forma a distintos rincones de Discord,
+      he aprendido que un servidor no es simplemente un conjunto de canales y roles,
+      sino un lugar que puede convertirse en un refugio, una identidad y una historia propia.
     </blockquote>
 
     <p>
-      Soy un chico de 23 años, dedicado a la creación, organización y
-      personalización de servidores, especialmente dentro de la comunidad furry.
-      Me gusta cuidar cada detalle, desde la estructura hasta la estética,
-      construyendo espacios que no solo sean funcionales, sino que transmitan
-      personalidad, misterio y carácter.
+      Soy un chico de 23 años, dedicado a la creación, organización y personalización
+      de servidores, especialmente dentro de la comunidad furry. Me gusta cuidar cada
+      detalle, desde la estructura hasta la estética, construyendo espacios que no solo
+      sean funcionales, sino que transmitan personalidad, misterio y carácter.
     </p>
 
     <br>
 
     <p>
-      No se trata únicamente de construir un servidor, sino de darle vida,
-      encontrar su esencia y convertirlo en un lugar al que otros quieran pertenecer.
+      No se trata únicamente de construir un servidor, sino de darle vida, encontrar
+      su esencia y convertirlo en un lugar al que otros quieran pertenecer.
     </p>
 
     <div class="signature">
@@ -760,82 +823,57 @@ footer strong{
 
   <div class="services-grid">
 
-    <div class="service">
+    <div class="service reveal">
       <span class="service-icon">🌑</span>
       <h3>El sendero del refugio</h3>
-      <p>
-        Organización de categorías, canales y espacios, creando una estructura
-        intuitiva donde cada rincón tenga un propósito y cada miembro encuentre su lugar.
-      </p>
+      <p>Organización de categorías, canales y espacios, creando una estructura intuitiva donde cada rincón tenga un propósito y cada miembro encuentre su lugar.</p>
     </div>
 
-    <div class="service">
+    <div class="service reveal">
       <span class="service-icon">🐾</span>
       <h3>Marcas de la manada</h3>
-      <p>
-        Diseño, distribución y jerarquía de roles, dando forma a una identidad
-        visual propia y a una estructura que refleje la esencia de tu comunidad.
-      </p>
+      <p>Diseño, distribución y jerarquía de roles, dando forma a una identidad visual propia y a una estructura que refleje la esencia de tu comunidad.</p>
     </div>
 
-    <div class="service">
+    <div class="service reveal">
       <span class="service-icon">🛡️</span>
       <h3>Guardianes del umbral</h3>
-      <p>
-        Configuración de bots, sistemas automatizados y herramientas de protección,
-        pensadas para facilitar la gestión y mantener el orden dentro del refugio.
-      </p>
+      <p>Configuración de bots, sistemas automatizados y herramientas de protección, pensadas para facilitar la gestión y mantener el orden dentro del refugio.</p>
     </div>
 
-    <div class="service">
+    <div class="service reveal">
       <span class="service-icon">🌘</span>
       <h3>Protección entre sombras</h3>
-      <p>
-        Configuración de permisos, seguridad y herramientas de moderación,
-        estableciendo barreras, controles y medidas que ayuden a proteger la comunidad.
-      </p>
+      <p>Configuración de permisos, seguridad y herramientas de moderación, estableciendo barreras, controles y medidas que ayuden a proteger la comunidad.</p>
     </div>
 
-    <div class="service">
+    <div class="service reveal">
       <span class="service-icon">🔮</span>
       <h3>La esencia de las sombras</h3>
-      <p>
-        Decoración, ambientación y personalización estética, cuidando cada detalle
-        para que el servidor transmita su propia atmósfera e identidad.
-      </p>
+      <p>Decoración, ambientación y personalización estética, cuidando cada detalle para que el servidor transmita su propia atmósfera e identidad.</p>
     </div>
 
-    <div class="service">
+    <div class="service reveal">
       <span class="service-icon">📜</span>
       <h3>Las leyes del refugio</h3>
-      <p>
-        Creación y organización de reglamentos, guías, canales informativos y
-        sistemas de orientación para quienes cruzan por primera vez sus puertas.
-      </p>
+      <p>Creación y organización de reglamentos, guías, canales informativos y sistemas de orientación para quienes cruzan por primera vez sus puertas.</p>
     </div>
 
-    <div class="service">
+    <div class="service reveal">
       <span class="service-icon">🐺</span>
       <h3>Vínculos de la manada</h3>
-      <p>
-        Diseño de sistemas sociales, rangos, recompensas y dinámicas interactivas
-        que fomenten la participación, la convivencia y el crecimiento de la comunidad.
-      </p>
+      <p>Diseño de sistemas sociales, rangos, recompensas y dinámicas interactivas que fomenten la participación, la convivencia y el crecimiento de la comunidad.</p>
     </div>
 
-    <div class="service">
+    <div class="service reveal">
       <span class="service-icon">🌙</span>
       <h3>El pacto de la luna</h3>
-      <p>
-        Configuración completamente adaptada a la temática, preferencias y
-        necesidades de cada proyecto. Cada servidor tiene su propia historia;
-        el diseño debe respetarla.
-      </p>
+      <p>Configuración completamente adaptada a la temática, preferencias y necesidades de cada proyecto. Cada servidor tiene su propia historia; el diseño debe respetarla.</p>
     </div>
 
   </div>
 
-  <div class="services-footer">
+  <div class="services-footer reveal">
     No construimos simples servidores.
     <br>
     Damos forma a nuevos refugios.
@@ -853,38 +891,35 @@ footer strong{
     <p>Cada proyecto deja una huella.</p>
   </div>
 
-  <div class="experience-box">
+  <div class="experience-box reveal">
 
     <p>
-      Mi experiencia no nace de un único proyecto, sino de años recorriendo
-      Discord, aprendiendo, experimentando y trabajando junto a numerosas
-      comunidades que, en algún momento, confiaron en mí para dar forma a sus espacios.
+      Mi experiencia no nace de un único proyecto, sino de años recorriendo Discord,
+      aprendiendo, experimentando y trabajando junto a numerosas comunidades que,
+      en algún momento, confiaron en mí para dar forma a sus espacios.
     </p>
 
     <p>
-      A lo largo de ese camino, he tenido la oportunidad de participar en
-      proyectos de distintas temáticas, conocer diferentes formas de gestionar
-      comunidades y afrontar retos que me han permitido perfeccionar mis
-      habilidades, ampliar mis conocimientos y desarrollar mi propio criterio
-      a la hora de diseñar y organizar servidores.
+      A lo largo de ese camino, he tenido la oportunidad de participar en proyectos
+      de distintas temáticas, conocer diferentes formas de gestionar comunidades y
+      afrontar retos que me han permitido perfeccionar mis habilidades, ampliar mis
+      conocimientos y desarrollar mi propio criterio a la hora de diseñar y organizar servidores.
     </p>
 
     <p>
-      Cada comunidad que ha pasado por mis manos ha dejado algo detrás:
-      una nueva idea, una lección o una experiencia que contribuye a lo que
-      hoy puedo ofrecer.
+      Cada comunidad que ha pasado por mis manos ha dejado algo detrás: una nueva idea,
+      una lección o una experiencia que contribuye a lo que hoy puedo ofrecer.
     </p>
 
     <p>
       <strong>
-        No son solo años en Discord, sino huellas de cada proyecto que han
-        dado forma a mi experiencia.
+        No son solo años en Discord, sino huellas de cada proyecto que han dado forma a mi experiencia.
       </strong>
     </p>
 
   </div>
 
-  <div class="signature">
+  <div class="signature reveal">
     ☾ Cada paso deja una marca en el camino.
   </div>
 
@@ -900,7 +935,7 @@ footer strong{
     <p>Las experiencias de quienes forman parte de esta historia.</p>
   </div>
 
-  <div class="coming-soon">
+  <div class="coming-soon reveal">
 
     <div class="coming-icon">🌙</div>
 
@@ -928,7 +963,7 @@ footer strong{
     <p>Comencemos a construir tu próximo refugio.</p>
   </div>
 
-  <div class="contact-box">
+  <div class="contact-box reveal">
 
     <div class="coming-icon">🐾</div>
 
@@ -937,13 +972,11 @@ footer strong{
     </h2>
 
     <p>
-      Las puertas de Lunar Hollow permanecen abiertas para quienes buscan
-      dar forma a su comunidad.
+      Las puertas de Lunar Hollow permanecen abiertas para quienes buscan dar forma a su comunidad.
       <br><br>
-      Actualmente, la atención, consultas y solicitudes de servicios se
-      realizan exclusivamente a través de <strong>Discord</strong>, donde
-      podremos hablar sobre tu proyecto, ideas, necesidades y los detalles
-      necesarios para comenzar a construir tu próximo refugio.
+      Actualmente, la atención, consultas y solicitudes de servicios se realizan exclusivamente
+      a través de <strong>Discord</strong>, donde podremos hablar sobre tu proyecto, ideas,
+      necesidades y los detalles necesarios para comenzar a construir tu próximo refugio.
     </p>
 
     <p>🐾・Discord:</p>
@@ -967,14 +1000,36 @@ footer strong{
 <footer>
   <strong>☾ LUNAR HOLLOW</strong>
   <br>
-  Diseñado con dedicación por NezukoChan.
+  Créditos: Rya_Lamineyamal
   <br>
-  © 2026 Lunar Hollow · Todos los derechos reservados.
-  <br>
-  <span style="color:#526987">✦ Tras el velo de la luna, todo refugio encuentra su forma.</span>
+  <span style="color:#526987">
+    ✦ Tras el velo de la luna, todo refugio encuentra su forma.
+  </span>
 </footer>
 
 <script>
+
+/* CREAR ESTRELLAS */
+
+const particleContainer=document.getElementById("particles");
+
+for(let i=0;i<65;i++){
+
+  const star=document.createElement("div");
+  star.className="star";
+
+  star.style.left=Math.random()*100+"%";
+  star.style.top=Math.random()*100+"%";
+  star.style.animationDelay=Math.random()*5+"s";
+  star.style.animationDuration=(3+Math.random()*5)+"s";
+
+  const size=1+Math.random()*2;
+  star.style.width=size+"px";
+  star.style.height=size+"px";
+
+  particleContainer.appendChild(star);
+
+}
 
 /* NAVEGACIÓN */
 
@@ -993,9 +1048,9 @@ function showPage(page){
 
   const selected=document.getElementById(page);
 
-  if(selected){
-    selected.classList.add("active");
-  }
+  if(!selected)return;
+
+  selected.classList.add("active");
 
   const activeButton=document.querySelector(
     'nav button[data-page="'+page+'"]'
@@ -1010,7 +1065,29 @@ function showPage(page){
     behavior:"smooth"
   });
 
+  revealElements();
+
 }
+
+/* ANIMACIÓN AL APARECER */
+
+function revealElements(){
+
+  const elements=document.querySelectorAll(".page.active .reveal");
+
+  elements.forEach((element,index)=>{
+
+    element.classList.remove("visible");
+
+    setTimeout(()=>{
+      element.classList.add("visible");
+    },80+index*100);
+
+  });
+
+}
+
+document.addEventListener("DOMContentLoaded",revealElements);
 
 /* COPIAR DISCORD */
 
@@ -1023,9 +1100,11 @@ function copyDiscord(){
 
     navigator.clipboard.writeText(username).then(()=>{
       text.textContent="¡Copiado!";
+
       setTimeout(()=>{
         text.textContent=username;
       },1800);
+
     }).catch(()=>{
       text.textContent=username;
     });
@@ -1040,9 +1119,11 @@ function copyDiscord(){
     try{
       document.execCommand("copy");
       text.textContent="¡Copiado!";
+
       setTimeout(()=>{
         text.textContent=username;
       },1800);
+
     }catch(e){
       text.textContent=username;
     }
